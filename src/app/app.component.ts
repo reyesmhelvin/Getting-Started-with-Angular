@@ -4,17 +4,18 @@ import { Component, Inject } from '@angular/core';
   selector: 'app-root',
   template: 
   `<div>
-    <app-simple-form></app-simple-form>
-    {{mail.message}}
+    <ul>
+      <li *ngFor="let message of mail.messages">
+        {{message}}
+      </li>
+    </ul>
   </div>`,
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
 
   constructor(
-    @Inject('mail') private mail,
-    @Inject('api') private api
+    @Inject('mail') private mail
   ){
 
   }
