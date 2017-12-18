@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-simple-form',
   template: `
     <div>
+      {{message}}
       <input #comment type="text"/>
       <button (click)="onClick(comment)">Post</button> 
     </div>
@@ -11,6 +12,8 @@ import { Component, OnInit } from '@angular/core';
   styles: []
 })
 export class SimpleFormComponent implements OnInit {
+
+  @Input() message;
 
   constructor() { }
 

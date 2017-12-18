@@ -5,9 +5,10 @@ import { Component, Inject } from '@angular/core';
   template: 
   `<div>
     <ul>
-      <li *ngFor="let message of mail.messages">
-        {{message}}
-      </li>
+      <app-simple-form 
+        *ngFor="let message of mail.messages"
+        [message]="message"
+      ></app-simple-form>
     </ul>
   </div>`,
   styleUrls: ['./app.component.css']
