@@ -8,25 +8,27 @@ import { Component, Inject } from '@angular/core';
     <ul>
       <li *ngFor="let message of mail.messages">
         {{message.text}}
-        <button (click)="getId(message.text)">Update</button>
+        <button (click)="getObj(message)">Update</button>
       </li>
     </ul>
     <app-simple-form 
-    *ngFor="let message of mail.messages"
-    [message]="message.text"
-    (update)="onUpdate(message.id, $event.text)"
+    [message]="this.passObj"
+    (update)="onUpdate($event.id, $event.text)"
   ></app-simple-form>
   </div>`,
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
 
+  passObj:object = {};
+
   onUpdate(id, text){
     this.mail.update(id, text)
   }
 
-  getId(text) {
-    console.log(text)
+  getObj(obj) {
+    console.log(obj)
+    this.passObj = obj;
   }
 
   constructor(

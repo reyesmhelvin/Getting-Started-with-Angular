@@ -10,6 +10,7 @@ export class MailService {
   ]
 
   update(id, text){
+    console.log(id, text, 'la')
     this.messages = this.messages.map( m => 
       m.id === id
       ? {id, text}
