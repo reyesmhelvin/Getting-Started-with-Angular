@@ -49,7 +49,11 @@ export class SimpleFormComponent implements OnInit {
   }
 
   nullifyInput(inputBox) {
+    let msg = this.message
     inputBox.value = null;
+    msg.id = null;
+    msg.text = null;
+
   }
 
   ngOnInit() {

@@ -18,13 +18,17 @@ export class MailService {
   }
 
   create(text){
+    console.log(text)
+    this.sanitizeItem(text);
     let id = this.getLastId();
     let item = {id: id, text: text};
     this.pushToList(item);
   }
 
   sanitizeItem(item){
-
+    if (item === undefined || item === null) {
+      throw new Error('Input needs to be provided.');
+    }
   }
 
   pushToList(item) {
