@@ -17,6 +17,26 @@ export class MailService {
     )
   }
 
+  create(text){
+    let id = this.getLastId();
+    let item = {id: id, text: text};
+    this.pushToList(item);
+  }
+
+  sanitizeItem(item){
+
+  }
+
+  pushToList(item) {
+    this.messages.push(item);
+    console.log(this.messages);
+  }
+
+  getLastId() {
+    let length = this.messages.length;
+    return length;
+  }
+
   constructor() { }
 
 }

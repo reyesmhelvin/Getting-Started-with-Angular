@@ -1,11 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, Inject } from '@angular/core';
 
 @Component({
   selector: 'app-simple-form',
   template: `
     <div>
       <input #comment type="text" [(ngModel)]="message.text">
-      <button (click)="addOrUpdate({id:message.id, text:message.text}, comment)">{{(isOnEdit()) ? 'Update' : 'Add'}}</button> 
+      <button (click)="updateItem({id:message.id, text:message.text, isOnEdit:isOnEditStyle()}, comment)">{{(isOnEdit()) ? 'Update' : 'Add'}}</button> 
       <button [ngClass]="isOnEditStyle()">Cancel</button>
     </div>
   `,
@@ -15,8 +15,9 @@ export class SimpleFormComponent implements OnInit {
   
   @Input() message;
   @Output() update = new EventEmitter()
+  @Output() create = new EventEmitter()
 
-  constructor() { }
+  constructor(@Inject('mail') private mail) { }
 
   isOnEditStyle() {
     if ('id' in this.message) {
@@ -31,10 +32,24 @@ export class SimpleFormComponent implements OnInit {
     return (this.message.id) ? true : false; 
   }
 
-  addOrUpdate(obj, element){
-    this.update.emit(obj);
-    element.value = '';
-    this.message.id = null; 
+  updateItem(input, inputBox){
+    if (input.id) {
+      console.log('update...')
+      this.update.emit(input);
+      return
+    } 
+    console.log('create...')
+    this.createItem(input);
+    this.nullifyInput(inputBox);
+  }
+
+  createItem(input) {
+   let inputText = input.text;
+   this.create.emit({text: inputText})
+  }
+
+  nullifyInput(inputBox) {
+    inputBox.value = null;
   }
 
   ngOnInit() {

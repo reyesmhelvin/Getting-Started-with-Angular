@@ -1,8 +1,8 @@
-button.edit {
+button.show.edit {
     visibility: hidden;
 }
 
-li.item:hover button.edit {
+li.item:hover button.show.edit {
     visibility: visible;
 }
 

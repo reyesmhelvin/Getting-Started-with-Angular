@@ -9,12 +9,13 @@ import { Component, Inject, OnInit } from '@angular/core';
     <ul>
       <li class="item" *ngFor="let message of mail.messages">
         {{message.text}}
-        <button (click)="getObj(message)" class="edit">Edit</button>
+        <button (click)="getObj(message)" [ngClass]="isOnEditStyle()">Edit</button>
       </li>
     </ul>
     <app-simple-form 
     [message]="this.passObj"
-    (update)="onUpdate($event.id, $event.text)"
+    (update)="onUpdate($event.id, $event.text, $event.isOnEdit)"
+    (create)="onCreate($event.text)"
   ></app-simple-form>
   </div>`,
   styleUrls: ['./app.component.css']
@@ -22,23 +23,28 @@ import { Component, Inject, OnInit } from '@angular/core';
 export class AppComponent {
 
   passObj:object = {};
+  isOnEdit:string = null;
 
-  onUpdate(id, text){
+  onUpdate(id, text, isOnEdit){
+    this.isOnEdit = isOnEdit
     this.mail.update(id, text);
+  }
+
+  onCreate(text){
+    this.mail.create(text);
   }
 
   isOnEditStyle() {
     if ('id' in this.passObj) {
       if (this.passObj) {
-        return 'show edit'
+        return 'hide'
       }
-      return 'hide';
+      return 'show edit';
     }
-    return 'show';
+    return 'show edit';
   }
 
   getObj(obj) {
-    console.log(this.passObj, '2nd')
     this.passObj = obj;
   }
 
@@ -49,7 +55,6 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    console.log(this.passObj, 'mhelvin reyes')
   }
 
 }
