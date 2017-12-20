@@ -1,0 +1,15 @@
+button.edit {
+    visibility: hidden;
+}
+
+li.item:hover button.edit {
+    visibility: visible;
+}
+
+.show {
+    visibility: visible;
+}
+
+.hide {
+    visibility: hidden;
+}
