@@ -14,7 +14,7 @@ import { Component, OnInit, Input, Output, EventEmitter, Inject } from '@angular
 export class SimpleFormComponent implements OnInit {
   
   @Input() message;
-  @Output() update = new EventEmitter()
+  @Output() update = new EventEmitter() 
   @Output() create = new EventEmitter()
 
   constructor(@Inject('mail') private mail) { }
@@ -34,11 +34,9 @@ export class SimpleFormComponent implements OnInit {
 
   updateItem(input, inputBox){
     if (input.id) {
-      console.log('update...')
       this.update.emit(input);
       return
     } 
-    console.log('create...')
     this.createItem(input);
     this.nullifyInput(inputBox);
   }
